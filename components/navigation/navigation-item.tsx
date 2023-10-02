@@ -10,7 +10,7 @@ interface NavitationItemProps {
     name: string;
 };
 
-export const NavitationItem = ({id, imageUrl, name}: NavitationItemProps) => {
+export const NavigationItem = ({id, imageUrl, name}: NavitationItemProps) => {
     const params = useParams();
     const router  = useRouter();
     const onClick = () => {

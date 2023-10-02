@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { NavigationAction } from "./navigation-action";
 import { Separator } from "../ui/separator";
 import { ScrollArea } from "../ui/scroll-area";
-import { NavitationItem } from "./navigation-item";
+import { NavigationItem } from "./navigation-item";
 import { ModeToggle } from "../mode-toggle";
 import { UserButton } from "@clerk/nextjs";
 
@@ -25,8 +25,7 @@ export const NavigationSidebar = async () => {
     })
 
     return (
-        <div
-            className="space-y-4 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3"
+        <div className="space-y-4 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3"
         >
             <NavigationAction />
             <Separator 
@@ -35,7 +34,7 @@ export const NavigationSidebar = async () => {
             <ScrollArea className="flex-1 w-full">
                 {server.map((server) => (
                     <div key={server.id} className="mb-4">
-                        <NavitationItem 
+                        <NavigationItem 
                             id={server.id}
                             name={server.name}
                             imageUrl={server.imageUrl}
