@@ -36,10 +36,10 @@ export const NavigationSidebar = async () => {
                 {server.map((server) => (
                     <div key={server.id} className="mb-4">
                         <NavitationItem 
-                             id={server.id}
-                             name={server.name}
-                             imageUrl={server.imageUrl}
-                         />
+                            id={server.id}
+                            name={server.name}
+                            imageUrl={server.imageUrl}
+                        />
                     </div>
                 ))}
             </ScrollArea>
