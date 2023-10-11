@@ -1,7 +1,44 @@
-const ChannelIdPage = () => {
+import { currentProfile } from "@/lib/current-profile";
+import { RedirectToSignIn } from "@clerk/nextjs";
+import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
+import ChatHeader from "@/components/chat/chat-header";
+
+interface ChannelIdPageProps {
+    params: {
+        serverId: string;
+        channelId: string;
+    }
+}
+
+const ChannelIdPage = async({ params }: ChannelIdPageProps) => {
+    const profile = await currentProfile();
+
+    if(!profile) {
+        return <RedirectToSignIn />
+    }
+    const channel = await db.channel.findUnique({
+        where: {
+            id: params.channelId,
+        }
+    });
+    
+    const member = await db.member.findMany({
+        where: {
+            profileId: profile.id,
+        }
+    });
+
+    if(!channel || !member) {
+        redirect("/")
+    }
     return ( 
         <div>
-            Channel Page!
+            <ChatHeader 
+                name={channel.name}
+                serverId={channel.serverId}
+                type="channel"
+            />
         </div>
      );
 }
