@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import ChatHeader from "@/components/chat/chat-header";
 import { ChatInput } from "@/components/chat/chat-input";
+import { ChatMessages } from "@/components/chat/chat-messages";
 
 interface ChannelIdPageProps {
     params: {
@@ -24,8 +25,9 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
         },
     });
 
-    const member = await db.member.findMany({
+    const member = await db.member.findFirst({
         where: {
+            serverId: params.serverId,
             profileId: profile.id,
         },
     });
@@ -40,7 +42,20 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
                 serverId={channel.serverId}
                 type="channel"
             />
-            <div className="flex-1">Future Messages</div>
+            <ChatMessages
+                name={channel.name}
+                member={member}
+                chatId={channel.id}
+                apiUrl="/api/messages"
+                socketUrl="/api/socket/messages"
+                socketQuery={{
+                    channelId: channel.id,
+                    serverId: channel.serverId,
+                }}
+                paramKey="channelId"
+                paramValue={channel.id}
+                type="channel"
+            />
             <ChatInput
                 apiUrl="/api/socket/messages"
                 name={channel.name}
