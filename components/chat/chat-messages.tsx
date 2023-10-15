@@ -106,29 +106,33 @@ export const ChatMessages = ({
                     )}
                 </div>
             )}
+
             <div className="flex flex-col-reverse mt-auto px-4">
                 {data?.pages?.map((group, i) => (
                     <Fragment key={i}>
                         {group.items.map(
                             (message: MessageWithMemberWithProfile) => (
-                                <ChatItem
-                                    key={message.id}
-                                    id={message.id}
-                                    content={message.content}
-                                    member={message.member}
-                                    timestamp={format(
-                                        new Date(message.createdAt),
-                                        DATE_FORMAT
-                                    )}
-                                    fileUrl={message.fileUrl}
-                                    deleted={message.deleted}
-                                    currentMember={member}
-                                    isUpdated={
-                                        message.updateAt !== message.createdAt
-                                    }
-                                    socketUrl={socketUrl}
-                                    socketQuery={socketQuery}
-                                />
+                                <>
+                                    <ChatItem
+                                        key={message.id}
+                                        id={message.id}
+                                        content={message.content}
+                                        member={message.member}
+                                        timestamp={format(
+                                            new Date(message.createdAt),
+                                            DATE_FORMAT
+                                        )}
+                                        fileUrl={message.fileUrl}
+                                        deleted={message.deleted}
+                                        currentMember={member}
+                                        isUpdated={
+                                            message.updateAt !==
+                                            message.createdAt
+                                        }
+                                        socketUrl={socketUrl}
+                                        socketQuery={socketQuery}
+                                    />
+                                </>
                             )
                         )}
                     </Fragment>
