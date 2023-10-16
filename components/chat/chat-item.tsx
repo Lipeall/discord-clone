@@ -76,7 +76,6 @@ export const ChatItem = ({
             });
 
             await axios.patch(url, values);
-
             form.reset();
             setIsEdititing(false);
         } catch (error) {}

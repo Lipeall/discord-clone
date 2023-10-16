@@ -82,10 +82,10 @@ export default async function handler(
             return res.status(404).json({ error: "Message not found" });
         }
 
-        const isMessageOwener = (message.memberId = member.id);
+        const isMessageOwner = (message.memberId = member.id);
         const isAdmin = member.role === MemberRole.ADMIN;
         const isModerator = member.role === MemberRole.MODERATOR;
-        const canModify = isMessageOwener || isAdmin || isModerator;
+        const canModify = isMessageOwner || isAdmin || isModerator;
 
         if (!canModify) {
             return res.status(401).json({ error: "Unauthorized" });
@@ -110,7 +110,7 @@ export default async function handler(
             });
         }
         if (req.method === "PATCH") {
-            if (!isMessageOwener) {
+            if (!isMessageOwner) {
                 return res.status(401).json({ error: "Unauthorized" });
             }
 
@@ -131,7 +131,7 @@ export default async function handler(
             });
         }
 
-        const updateKey = `chat:${channelId}:message:update`;
+        const updateKey = `chat:${channelId}:messages:update`;
 
         res?.socket?.server?.io?.emit(updateKey, message);
 
