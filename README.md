@@ -1,10 +1,8 @@
 # Discord Clone
 
-You can access the project using the following link: [Discord Clone](https://discord-clone-production-613c.up.railway.app/)
-
 ## Stack Used
 
-**Front-end:** Next.js, React, TailwindCSS, Socket.io
+**Front-end:** Next.js, TailwindCSS, Socket.io
 
 **Back-end:** Prisma, MySQL, Socket.io
 ## Features
